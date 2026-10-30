@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Governance - Nhà Quản Trị Dự Án AI Tương Tác</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts: Be Vietnam Pro -->
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- html2canvas for PDF/Image Export -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <style>
+        body {
+            font-family: 'Be Vietnam Pro', sans-serif;
+            background-color: #0f172a;
+            color: #f8fafc;
+        }
+        .glass-card {
+            background: rgba(30, 41, 59, 0.85);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .glow-blue {
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.25);
+        }
+        .glow-emerald {
+            box-shadow: 0 0 20px rgba(16, 185, 129, 0.25);
+        }
+        .glow-purple {
+            box-shadow: 0 0 20px rgba(168, 85, 247, 0.25);
+        }
+        .glow-amber {
+            box-shadow: 0 0 20px rgba(245, 158, 11, 0.25);
+        }
+        /* Hide scrollbars for clean UI */
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col items-center justify-start p-3 md:p-6">
+
+    <!-- TOP HEADER / NAV BAR -->
+    <header class="w-full max-w-6xl glass-card rounded-2xl p-4 md:p-6 mb-6 flex flex-col md:flex-row items-center justify-between gap-4 border-b border-indigo-500/30 glow-blue">
+        <div class="flex items-center gap-4">
+            <div class="w-12 h-12 bg-indigo-600 rounded-xl flex items-center justify-center text-2xl font-black text-white shadow-lg">
+                <i class="fa-solid fa-brain"></i>
+            </div>
+            <div>
+                <span class="text-xs font-bold text-indigo-400 tracking-widest uppercase">Tin học - Vinschool Grand Park</span>
+                <h1 class="text-xl md:text-2xl font-black text-white tracking-tight">ĐÁNH GIÁ & TRÁCH NHIỆM CỦA NHÀ QUẢN TRỊ AI</h1>
+            </div>
+        </div>
+
+        <!-- Student Info Input Panel -->
+        <div class="flex flex-wrap items-center gap-3 w-full md:w-auto bg-slate-900/60 p-2.5 rounded-xl border border-slate-700">
+            <div class="flex items-center gap-2 text-xs">
+                <i class="fa-solid fa-user-gear text-indigo-400"></i>
+                <input type="text" id="studentName" placeholder="Họ & tên học sinh..." class="bg-slate-800 border border-slate-600 rounded-lg px-3 py-1.5 text-white text-xs focus:outline-none focus:border-indigo-400 w-36 md:w-44">
+            </div>
+            <div class="flex items-center gap-2 text-xs">
+                <i class="fa-solid fa-users text-indigo-400"></i>
+                <input type="text" id="studentClass" placeholder="Lớp (VD: 10A1)..." class="bg-slate-800 border border-slate-600 rounded-lg px-3 py-1.5 text-white text-xs focus:outline-none focus:border-indigo-400 w-24">
+            </div>
+        </div>
+    </header>
+
+    <!-- LESSON TAB NAVIGATION -->
+    <nav class="w-full max-w-6xl flex flex-wrap gap-2 md:gap-3 mb-6">
+        <button id="nav-btn-7" onclick="switchLesson(7)" class="flex-1 min-w-[140px] py-3 px-4 rounded-xl font-bold text-xs md:text-sm transition-all flex items-center justify-center gap-2 bg-indigo-600 text-white shadow-lg glow-blue">
+            <i class="fa-solid fa-shield-halved"></i> Tiết 7: Kiểm Định AI
+        </button>
+        <button id="nav-btn-8" onclick="switchLesson(8)" class="flex-1 min-w-[140px] py-3 px-4 rounded-xl font-bold text-xs md:text-sm transition-all flex items-center justify-center gap-2 bg-slate-800 text-slate-400 hover:bg-slate-700">
+            <i class="fa-solid fa-scale-balanced"></i> Tiết 8: Hội Đồng Đạo Đức
+        </button>
+        <button id="nav-btn-9" onclick="switchLesson(9)" class="flex-1 min-w-[140px] py-3 px-4 rounded-xl font-bold text-xs md:text-sm transition-all flex items-center justify-center gap-2 bg-slate-800 text-slate-400 hover:bg-slate-700">
+            <i class="fa-solid fa-heart-pulse"></i> Tiết 9: Nhật Ký & Wellbeing
+        </button>
+        <button id="nav-btn-10" onclick="switchLesson(10)" class="flex-1 min-w-[140px] py-3 px-4 rounded-xl font-bold text-xs md:text-sm transition-all flex items-center justify-center gap-2 bg-slate-800 text-slate-400 hover:bg-slate-700">
+            <i class="fa-solid fa-gavel"></i> Tiết 10: Vụ Việc & Phán Quyết
+        </button>
+    </nav>
+
+    <!-- MAIN CONTENT CONTAINER -->
+    <main class="w-full max-w-6xl">
+
+        <!-- ================================================================= -->
+        <!-- TIẾT 7: PHÒNG KIỂM ĐỊNH GIẢI PHÁP AI & ẢO GIÁC AI -->
+        <!-- ================================================================= -->
+        <section id="lesson-7" class="space-y-6">
+            
+            <!-- Banner Mục tiêu -->
+            <div class="glass-card rounded-2xl p-4 md:p-5 border-l-4 border-indigo-500 flex items-center justify-between">
+                <div>
+                    <h2 class="text-base font-bold text-indigo-300 flex items-center gap-2">
+                        <i class="fa-solid fa-microscope"></i> PHÒNG KIỂM ĐỊNH GIẢI PHÁP AI (Tiết 7)
+                    </h2>
+                    <p class="text-xs text-slate-300 mt-1">Đánh giá 4 tiêu chí thiết kế | Nhận diện & Xử lý Ảo giác AI (Hallucinations)</p>
+                </div>
+                <span class="text-xs bg-indigo-500/20 text-indigo-300 px-3 py-1 rounded-full border border-indigo-500/40 font-semibold">MTB 1.3.a & 1.3.b</span>
+            </div>
+
+            <!-- Hoạt động 1: Khởi động Thẻ Màu -->
+            <div class="glass-card rounded-2xl p-5 md:p-6 border border-slate-700">
+                <h3 class="text-sm font-bold text-slate-200 mb-3 flex items-center gap-2">
+                    <span class="w-6 h-6 rounded-full bg-indigo-600 text-xs flex items-center justify-center font-black">1</span>
+                    Khởi Động: Thử Thách Đánh Giá Kết Quả AI (Thẻ Màu)
+                </h3>
+                <p class="text-xs text-slate-400 mb-4">Đọc mẩu kết quả từ AI bên dưới và quyết định mức độ tin cậy bằng cách chọn thẻ:</p>
+
+                <div class="bg-slate-900/80 p-4 rounded-xl border border-slate-800 mb-4">
+                    <span class="text-[10px] font-bold uppercase text-indigo-400 bg-indigo-950 px-2 py-0.5 rounded border border-indigo-800">Tình huống kết quả AI</span>
+                    <p class="text-sm font-medium text-slate-200 mt-2 italic" id="t7-scenario-text">
+                        "AI trích dẫn: Theo Báo cáo Giáo dục 2025, 98.5% học sinh lớp 10 học tốt hơn khi có AI hỗ trợ học trực tuyến, trích từ NXB Giáo dục Việt Nam."
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-3 gap-3 mb-4">
+                    <button onclick="selectT7Card('green')" id="t7-card-green" class="p-3 rounded-xl border border-emerald-500/30 bg-emerald-950/20 hover:bg-emerald-950/50 text-emerald-300 font-bold text-xs flex flex-col items-center justify-center gap-1 transition-all">
+                        <span class="text-xl">🟢</span>
+                        <span>Có thể sử dụng</span>
+                        <span class="text-[10px] opacity-70 font-normal">(Có căn cứ rõ)</span>
+                    </button>
+                    <button onclick="selectT7Card('yellow')" id="t7-card-yellow" class="p-3 rounded-xl border border-amber-500/30 bg-amber-950/20 hover:bg-amber-950/50 text-amber-300 font-bold text-xs flex flex-col items-center justify-center gap-1 transition-all">
+                        <span class="text-xl">🟡</span>
+                        <span>Cần kiểm tra</span>
+                        <span class="text-[10px] opacity-70 font-normal">(Thiếu nguồn tin)</span>
+                    </button>
+                    <button onclick="selectT7Card('red')" id="t7-card-red" class="p-3 rounded-xl border border-rose-500/30 bg-rose-950/20 hover:bg-rose-950/50 text-rose-300 font-bold text-xs flex flex-col items-center justify-center gap-1 transition-all">
+                        <span class="text-xl">🔴</span>
+                        <span>Không nên dùng</span>
+                        <span class="text-[10px] opacity-70 font-normal">(Có dấu hiệu ảo giác)</span>
+                    </button>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-slate-300 mb-1">Giải thích căn cứ lựa chọn của em:</label>
+                    <textarea id="t7-reason-card" rows="2" placeholder="Tại sao em đưa ra quyết định trên? Dựa vào dấu hiệu nào?" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-3 text-xs text-white focus:outline-none focus:border-indigo-400"></textarea>
+                </div>
+            </div>
+
+            <!-- Hoạt động 2 & 3: Phiếu Kiểm Định Dự Án Nhóm -->
+            <div class="glass-card rounded-2xl p-5 md:p-6 border border-slate-700">
+                <h3 class="text-sm font-bold text-slate-200 mb-3 flex items-center gap-2">
+                    <span class="w-6 h-6 rounded-full bg-indigo-600 text-xs flex items-center justify-center font-black">2</span>
+                    Bảng Kiểm Định Lại Giải Pháp AI Dự Án
+                </h3>
+                <p class="text-xs text-slate-400 mb-4">Đánh giá thành phần AI quan trọng nhất trong dự án nhóm theo các tiêu chí:</p>
+
+                <div class="overflow-x-auto mb-4">
+                    <table class="w-full text-left text-xs border-collapse">
+                        <thead>
+                            <tr class="bg-slate-900/80 text-slate-300 font-bold border-b border-slate-700">
+                                <th class="p-3 w-1/3">Tiêu chí kiểm định</th>
+                                <th class="p-3 w-1/4">Trạng thái</th>
+                                <th class="p-3">Ghi chú & Dẫn chứng</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-800 text-slate-300">
+                            <tr>
+                                <td class="p-3 font-semibold text-indigo-300">1. Phù hợp vấn đề & Người dùng?</td>
+                                <td class="p-3">
+                                    <select id="t7_check1" class="bg-slate-900 border border-slate-700 rounded-lg p-1.5 text-xs text-white focus:outline-none w-full">
+                                        <option value="Đạt">✓ Đạt chuẩn</option>
+                                        <option value="Cần sửa">! Cần điều chỉnh</option>
+                                    </select>
+                                </td>
+                                <td class="p-3"><input type="text" id="t7_note1" placeholder="Dự án giải quyết đúng khó khăn nào?" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-1.5 text-xs text-white"></td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 font-semibold text-indigo-300">2. Hiệu quả & Khả thi thực tế?</td>
+                                <td class="p-3">
+                                    <select id="t7_check2" class="bg-slate-900 border border-slate-700 rounded-lg p-1.5 text-xs text-white focus:outline-none w-full">
+                                        <option value="Đạt">✓ Đạt chuẩn</option>
+                                        <option value="Cần sửa">! Cần điều chỉnh</option>
+                                    </select>
+                                </td>
+                                <td class="p-3"><input type="text" id="t7_note2" placeholder="Có thể triển khai trong đời thực không?" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-1.5 text-xs text-white"></td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 font-semibold text-indigo-300">3. Thông tin AI được kiểm chứng?</td>
+                                <td class="p-3">
+                                    <select id="t7_check3" class="bg-slate-900 border border-slate-700 rounded-lg p-1.5 text-xs text-white focus:outline-none w-full">
+                                        <option value="Đã kiểm tra">✓ Đã đối chiếu nguồn</option>
+                                        <option value="Chưa kiểm tra">! Chưa đối chiếu</option>
+                                    </select>
+                                </td>
+                                <td class="p-3"><input type="text" id="t7_note3" placeholder="Đã đối chiếu với nguồn uy tín nào?" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-1.5 text-xs text-white"></td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 font-semibold text-rose-400">4. Phát hiện Ảo giác AI (Hallucination)?</td>
+                                <td class="p-3">
+                                    <select id="t7_check4" class="bg-slate-900 border border-slate-700 rounded-lg p-1.5 text-xs text-white focus:outline-none w-full">
+                                        <option value="Không có">An toàn (Không có)</option>
+                                        <option value="Có nguy cơ">⚠️ Có nguy cơ ảo giác</option>
+                                    </select>
+                                </td>
+                                <td class="p-3"><input type="text" id="t7_note4" placeholder="Nội dung nào có dấu hiệu bịa đặt/sai số?" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-1.5 text-xs text-white"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="bg-indigo-950/30 p-3.5 rounded-xl border border-indigo-800/50">
+                    <label class="block text-xs font-bold text-indigo-300 mb-1">🛠️ Điểm quan trọng nhất nhóm cần cải thiện ngay:</label>
+                    <input type="text" id="t7_improvement" placeholder="Ví dụ: Cần kiểm tra lại các số liệu thống kê AI đưa ra trước khi thuyết trình..." class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2 text-xs text-white focus:outline-none">
+                </div>
+            </div>
+
+        </section>
+
+        <!-- ================================================================= -->
+        <!-- TIẾT 8: HỘI ĐỒNG ĐẠO ĐỨC AI & TÁC ĐỘNG ĐA CHIỀU -->
+        <!-- ================================================================= -->
+        <section id="lesson-8" class="hidden space-y-6">
+            
+            <div class="glass-card rounded-2xl p-4 md:p-5 border-l-4 border-emerald-500 flex items-center justify-between">
+                <div>
+                    <h2 class="text-base font-bold text-emerald-300 flex items-center gap-2">
+                        <i class="fa-solid fa-scale-balanced"></i> HỘI ĐỒNG ĐẠO ĐỨC AI (Tiết 8)
+                    </h2>
+                    <p class="text-xs text-slate-300 mt-1">Đánh giá Đạo đức | Tác động ngành nghề | Quyền lợi & Rủi ro các bên liên quan</p>
+                </div>
+                <span class="text-xs bg-emerald-500/20 text-emerald-300 px-3 py-1 rounded-full border border-emerald-500/40 font-semibold">MTB 1.3.c & 1.3.d</span>
+            </div>
+
+            <!-- Phân tích 4 Vai Tò Tương Tác -->
+            <div class="glass-card rounded-2xl p-5 md:p-6 border border-slate-700">
+                <h3 class="text-sm font-bold text-slate-200 mb-2 flex items-center gap-2">
+                    <span class="w-6 h-6 rounded-full bg-emerald-600 text-xs flex items-center justify-center font-black">1</span>
+                    Xem Xét Giải Pháp AI Dưới 4 Góc Nhìn Vai Trò
+                </h3>
+                <p class="text-xs text-slate-400 mb-4">Tình huống: System Camera AI nhận diện học sinh chạy trong hành lang & tự động gửi cảnh báo về GV/Phụ huynh.</p>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="bg-slate-900/60 p-3.5 rounded-xl border border-slate-700">
+                        <div class="flex items-center gap-2 text-xs font-bold text-amber-400 mb-1">
+                            <i class="fa-solid fa-graduation-cap"></i> Góc nhìn HỌC SINH
+                        </div>
+                        <textarea id="t8_perspective_student" rows="2" placeholder="Học sinh lo lắng hay hào hứng điều gì? (Quyền riêng tư, sự thoải mái...)" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2 text-xs text-white focus:outline-none"></textarea>
+                    </div>
+                    <div class="bg-slate-900/60 p-3.5 rounded-xl border border-slate-700">
+                        <div class="flex items-center gap-2 text-xs font-bold text-sky-400 mb-1">
+                            <i class="fa-solid fa-chalkboard-user"></i> Góc nhìn GIÁO VIÊN
+                        </div>
+                        <textarea id="t8_perspective_teacher" rows="2" placeholder="Hỗ trợ quản lý lớp ra sao? Có thể gây cảnh báo nhầm không?" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2 text-xs text-white focus:outline-none"></textarea>
+                    </div>
+                    <div class="bg-slate-900/60 p-3.5 rounded-xl border border-slate-700">
+                        <div class="flex items-center gap-2 text-xs font-bold text-emerald-400 mb-1">
+                            <i class="fa-solid fa-users-between-lines"></i> Góc nhìn PHỤ HUYNH
+                        </div>
+                        <textarea id="t8_perspective_parent" rows="2" placeholder="An toàn của con vs Sự riêng tư cá nhân của con?" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2 text-xs text-white focus:outline-none"></textarea>
+                    </div>
+                    <div class="bg-slate-900/60 p-3.5 rounded-xl border border-slate-700">
+                        <div class="flex items-center gap-2 text-xs font-bold text-purple-400 mb-1">
+                            <i class="fa-solid fa-user-tie"></i> Góc nhìn NHÀ QUẢN LÝ
+                        </div>
+                        <textarea id="t8_perspective_manager" rows="2" placeholder="Trách nhiệm pháp lý, chi phí vận hành & tính công bằng?" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2 text-xs text-white focus:outline-none"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bảng Hồ Sơ Đạo Đức Dự Án Của Nhóm -->
+            <div class="glass-card rounded-2xl p-5 md:p-6 border border-slate-700">
+                <h3 class="text-sm font-bold text-slate-200 mb-3 flex items-center gap-2">
+                    <span class="w-6 h-6 rounded-full bg-emerald-600 text-xs flex items-center justify-center font-black">2</span>
+                    Đánh Giá Đạo Đức & Tác Động Dự Án Nhóm Em
+                </h3>
+
+                <div class="space-y-3 text-xs">
+                    <div>
+                        <label class="block font-semibold text-emerald-300 mb-1">1. AI trong dự án nhóm đem lại lợi ích cho ai & Rủi ro cho ai?</label>
+                        <input type="text" id="t8_benefit_risk" placeholder="Ví dụ: Giúp người già dễ dùng máy nhưng có nguy cơ rò rỉ dữ liệu cá nhân..." class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2.5 text-white">
+                    </div>
+
+                    <div>
+                        <label class="block font-semibold text-emerald-300 mb-1">2. Biện pháp giảm thiểu rủi ro đạo đức của nhóm là gì?</label>
+                        <input type="text" id="t8_mitigation" placeholder="Ví dụ: Bắt buộc mã hóa dữ liệu, thông báo rõ ràng trước khi thu thập..." class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2.5 text-white">
+                    </div>
+
+                    <div>
+                        <label class="block font-semibold text-emerald-300 mb-1">3. Giải pháp của nhóm có thể thay đổi/tác động đến ngành nghề thực tế nào?</label>
+                        <input type="text" id="t8_industry_impact" placeholder="Ví dụ: Ngành chăm sóc sức khỏe, ngành vận tải tự lái..." class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2.5 text-white">
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- ================================================================= -->
+        <!-- TIẾT 9: NHẬT KÝ TƯƠNG TÁC AI & QUẢN LÝ WELLBEING -->
+        <!-- ================================================================= -->
+        <section id="lesson-9" class="hidden space-y-6">
+            
+            <div class="glass-card rounded-2xl p-4 md:p-5 border-l-4 border-purple-500 flex items-center justify-between">
+                <div>
+                    <h2 class="text-base font-bold text-purple-300 flex items-center gap-2">
+                        <i class="fa-solid fa-heart-pulse"></i> NHẬT KÝ TƯƠNG TÁC AI & WELLBEING (Tiết 9)
+                    </h2>
+                    <p class="text-xs text-slate-300 mt-1">Suy ngẫm quy trình 4 bước | Tránh phụ thuộc AI tiêu cực | Làm chủ công cụ AI</p>
+                </div>
+                <span class="text-xs bg-purple-500/20 text-purple-300 px-3 py-1 rounded-full border border-purple-500/40 font-semibold">MTB 1.3.e</span>
+            </div>
+
+            <!-- Nhật Ký 4 Bước Tương Tác với AI -->
+            <div class="glass-card rounded-2xl p-5 md:p-6 border border-slate-700">
+                <h3 class="text-sm font-bold text-slate-200 mb-3 flex items-center gap-2">
+                    <span class="w-6 h-6 rounded-full bg-purple-600 text-xs flex items-center justify-center font-black">1</span>
+                    Nhật Ký Phân Tích 1 Lần Tương Tác AI Đáng Nhớ
+                </h3>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+                    <div class="bg-slate-900/80 p-3.5 rounded-xl border border-slate-800">
+                        <span class="font-bold text-amber-400 block mb-1">STEP 1: TRƯỚC KHI HỎI AI</span>
+                        <p class="text-slate-400 text-[11px] mb-2">Em cần giải quyết việc gì? Em đã tự suy nghĩ trước ra sao?</p>
+                        <textarea id="t9_step1" rows="2" placeholder="Viết ghi chú trước khi hỏi..." class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2 text-white"></textarea>
+                    </div>
+
+                    <div class="bg-slate-900/80 p-3.5 rounded-xl border border-slate-800">
+                        <span class="font-bold text-sky-400 block mb-1">STEP 2: KHI HỎI AI (PROMPT)</span>
+                        <p class="text-slate-400 text-[11px] mb-2">Em đã yêu cầu AI hỗ trợ cụ thể điều gì?</p>
+                        <textarea id="t9_step2" rows="2" placeholder="Câu lệnh em đã dùng..." class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2 text-white"></textarea>
+                    </div>
+
+                    <div class="bg-slate-900/80 p-3.5 rounded-xl border border-slate-800">
+                        <span class="font-bold text-purple-400 block mb-1">STEP 3: KHI NHẬN KẾT QUẢ</span>
+                        <p class="text-slate-400 text-[11px] mb-2">Em đã chọn lọc, loại bỏ hay chỉnh sửa phần nào?</p>
+                        <textarea id="t9_step3" rows="2" placeholder="Ghi rõ cách em kiểm tra & lọc bài..." class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2 text-white"></textarea>
+                    </div>
+
+                    <div class="bg-slate-900/80 p-3.5 rounded-xl border border-slate-800">
+                        <span class="font-bold text-emerald-400 block mb-1">STEP 4: NHÌN LẠI (SUY NGẪM)</span>
+                        <p class="text-slate-400 text-[11px] mb-2">AI giúp tốt ở đâu? Có gây phụ thuộc hay mất tự do tư duy không?</p>
+                        <textarea id="t9_step4" rows="2" placeholder="Bài học rút ra..." class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2 text-white"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Phiếu Sửa Tương Tác Chưa Tốt (Trước đây -> Sau này) -->
+            <div class="glass-card rounded-2xl p-5 md:p-6 border border-slate-700">
+                <h3 class="text-sm font-bold text-slate-200 mb-3 flex items-center gap-2">
+                    <span class="w-6 h-6 rounded-full bg-purple-600 text-xs flex items-center justify-center font-black">2</span>
+                    Phiếu Tải "Trước Đây ➔ Sau Này" (Cải Thiện Tương Tác)
+                </h3>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+                    <div class="bg-rose-950/20 border border-rose-500/30 p-3.5 rounded-xl">
+                        <span class="font-bold text-rose-400 block mb-1">❌ THÓI QUAN CŨ (CÓ NGUY CƠ)</span>
+                        <p class="text-slate-400 text-[11px] mb-2">Ví dụ: Sao chép ngay câu trả lời đầu tiên mà không đọc kĩ.</p>
+                        <input type="text" id="t9_old_habit" placeholder="Nhập thói quen cũ chưa tốt..." class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2 text-white">
+                    </div>
+
+                    <div class="bg-emerald-950/20 border border-emerald-500/30 p-3.5 rounded-xl">
+                        <span class="font-bold text-emerald-400 block mb-1">✅ THÓI QUAN MỚI (CHỦ ĐỘNG)</span>
+                        <p class="text-slate-400 text-[11px] mb-2">Ví dụ: Tự phác thảo ý tưởng trước, dùng AI để tham khảo mở rộng.</p>
+                        <input type="text" id="t9_new_habit" placeholder="Nhập nguyên tắc mới của em..." class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2 text-white">
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- ================================================================= -->
+        <!-- TIẾT 10: HỒ SƠ VỤ VIỆC AI & PHIÊN HỌP QUẢN TRỊ AI -->
+        <!-- ================================================================= -->
+        <section id="lesson-10" class="hidden space-y-6">
+            
+            <div class="glass-card rounded-2xl p-4 md:p-5 border-l-4 border-amber-500 flex items-center justify-between">
+                <div>
+                    <h2 class="text-base font-bold text-amber-300 flex items-center gap-2">
+                        <i class="fa-solid fa-gavel"></i> PHIÊN HỌP NHÀ QUẢN TRỊ AI (Tiết 10)
+                    </h2>
+                    <p class="text-xs text-slate-300 mt-1">Tổng hợp năng lực Đánh giá - Kiểm chứng - Trách nhiệm & Ra phán quyết</p>
+                </div>
+                <span class="text-xs bg-amber-500/20 text-amber-300 px-3 py-1 rounded-full border border-amber-500/40 font-semibold">TỔNG HỢP CẢ 5 MTB</span>
+            </div>
+
+            <!-- Hồ sơ Điều tra Vụ Việc -->
+            <div class="glass-card rounded-2xl p-5 md:p-6 border border-slate-700">
+                <h3 class="text-sm font-bold text-slate-200 mb-3 flex items-center gap-2">
+                    <span class="w-6 h-6 rounded-full bg-amber-600 text-xs flex items-center justify-center font-black">1</span>
+                    Điều Tra Hồ Sơ Vụ Việc AI Trường Học
+                </h3>
+                
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-2.5 text-xs mb-4">
+                    <div class="bg-slate-900 p-2.5 rounded-xl border border-slate-800">
+                        <span class="font-bold text-amber-400 block text-[11px]">HỒ SƠ A</span>
+                        <span class="text-slate-300">Nhu cầu 3 nhóm học sinh khác nhau.</span>
+                    </div>
+                    <div class="bg-slate-900 p-2.5 rounded-xl border border-slate-800">
+                        <span class="font-bold text-rose-400 block text-[11px]">HỒ SƠ B</span>
+                        <span class="text-slate-300">AI xuất hiện sai số / ảo giác.</span>
+                    </div>
+                    <div class="bg-slate-900 p-2.5 rounded-xl border border-slate-800">
+                        <span class="font-bold text-sky-400 block text-[11px]">HỒ SƠ C</span>
+                        <span class="text-slate-300">Học sinh có nguy cơ phụ thuộc.</span>
+                    </div>
+                    <div class="bg-slate-900 p-2.5 rounded-xl border border-slate-800">
+                        <span class="font-bold text-purple-400 block text-[11px]">HỒ SƠ D</span>
+                        <span class="text-slate-300">Lo ngại về bảo mật dữ liệu.</span>
+                    </div>
+                </div>
+
+                <div class="space-y-3 text-xs">
+                    <div>
+                        <label class="block font-semibold text-slate-300 mb-1">Rủi ro lớn nhất mà Ban Quản Trị phát hiện là gì?</label>
+                        <input type="text" id="t10_risk" placeholder="Nêu rủi ro quan trọng nhất..." class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2 text-white">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quyết Định Triển Khai -->
+            <div class="glass-card rounded-2xl p-5 md:p-6 border border-slate-700">
+                <h3 class="text-sm font-bold text-slate-200 mb-3 flex items-center gap-2">
+                    <span class="w-6 h-6 rounded-full bg-amber-600 text-xs flex items-center justify-center font-black">2</span>
+                    Phán Quyết Của Ban Quản Trị AI
+                </h3>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-3 mb-4">
+                    <button onclick="selectT10Decision('green')" id="t10-dec-green" class="p-3.5 rounded-xl border border-emerald-500/30 bg-emerald-950/20 text-emerald-300 font-bold text-xs flex flex-col items-center justify-center gap-1 transition-all">
+                        <span class="text-2xl">🟢</span>
+                        <span>TRIỂN KHAI NGAY</span>
+                        <span class="text-[10px] font-normal opacity-70">(Đủ bằng chứng, an toàn)</span>
+                    </button>
+                    <button onclick="selectT10Decision('yellow')" id="t10-dec-yellow" class="p-3.5 rounded-xl border border-amber-500/30 bg-amber-950/20 text-amber-300 font-bold text-xs flex flex-col items-center justify-center gap-1 transition-all">
+                        <span class="text-2xl">🟡</span>
+                        <span>ĐIỀU CHỈNH RỒI MỚI DÙNG</span>
+                        <span class="text-[10px] font-normal opacity-70">(Có tiềm năng nhưng còn rủi ro)</span>
+                    </button>
+                    <button onclick="selectT10Decision('red')" id="t10-dec-red" class="p-3.5 rounded-xl border border-rose-500/30 bg-rose-950/20 text-rose-300 font-bold text-xs flex flex-col items-center justify-center gap-1 transition-all">
+                        <span class="text-2xl">🔴</span>
+                        <span>CHƯA TRIỂN KHAI</span>
+                        <span class="text-[10px] font-normal opacity-70">(Rủi ro quá lớn)</span>
+                    </button>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs">
+                    <div>
+                        <label class="block font-semibold text-amber-300 mb-1">1. Đưa ra 2 Bằng chứng bảo vệ quyết định:</label>
+                        <textarea id="t10_evidences" rows="2" placeholder="Bằng chứng 1... Bằng chứng 2..." class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2 text-white"></textarea>
+                    </div>
+                    <div>
+                        <label class="block font-semibold text-amber-300 mb-1">2. Giải pháp khắc phục & Nguyên tắc AI của em:</label>
+                        <textarea id="t10_rule" rows="2" placeholder="Nguyên tắc sử dụng AI có trách nhiệm..." class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2 text-white"></textarea>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- ACTION BUTTONS -->
+        <div class="flex flex-wrap items-center justify-center gap-4 mt-8 no-print">
+            <button onclick="generateReport()" class="px-6 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-bold text-sm rounded-xl shadow-lg transition-all flex items-center gap-2 glow-purple">
+                <i class="fa-solid fa-chart-pie"></i> TỔNG HỢP BÀI LÀM CẢ 4 TIẾT
+            </button>
+        </div>
+
+        <!-- ================================================================= -->
+        <!-- SUMMARY REPORT SECTION -->
+        <!-- ================================================================= -->
+        <section id="summarySection" class="hidden mt-10 pt-6 border-t-2 border-dashed border-indigo-500/40">
+            
+            <div id="summaryCard" class="glass-card rounded-2xl p-6 md:p-8 bg-slate-900 text-slate-100 border border-indigo-500/40 glow-blue">
+                <div class="flex flex-col md:flex-row items-start md:items-center justify-between pb-4 border-b border-slate-700 gap-2 mb-6">
+                    <div>
+                        <span class="text-xs font-extrabold uppercase text-indigo-400 tracking-wider">HỒ SƠ BÁO CÁO KẾT QUẢ HỌC TẬP</span>
+                        <h2 class="text-lg md:text-xl font-black text-white">BÀI 1.3: ĐÁNH GIÁ & TRÁCH NHIỆM CỦA NHÀ QUẢN TRỊ AI</h2>
+                    </div>
+                    <div id="reportStudentInfo" class="text-xs font-bold bg-indigo-950 px-3 py-1.5 rounded-lg border border-indigo-800 text-indigo-300">
+                        Học sinh: Chưa điền | Lớp: Chưa điền
+                    </div>
+                </div>
+
+                <div class="space-y-5 text-xs">
+                    <!-- Summary Tiết 7 -->
+                    <div class="bg-slate-950/60 p-4 rounded-xl border border-slate-800">
+                        <h3 class="font-bold text-indigo-400 mb-2 uppercase flex items-center gap-2 text-xs">
+                            <i class="fa-solid fa-shield-halved"></i> Tiết 7: Phòng Kiểm Định & Ảo Giác AI
+                        </h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-2 text-slate-300">
+                            <p><strong>Thẻ đánh giá:</strong> <span id="sum_t7_card" class="text-amber-300">Chưa chọn</span></p>
+                            <p><strong>Căn cứ chọn:</strong> <span id="sum_t7_reason">Chưa nhập</span></p>
+                            <p class="col-span-1 md:col-span-2"><strong>Điểm cải thiện dự án:</strong> <span id="sum_t7_imp" class="text-indigo-300">Chưa nhập</span></p>
+                        </div>
+                    </div>
+
+                    <!-- Summary Tiết 8 -->
+                    <div class="bg-slate-950/60 p-4 rounded-xl border border-slate-800">
+                        <h3 class="font-bold text-emerald-400 mb-2 uppercase flex items-center gap-2 text-xs">
+                            <i class="fa-solid fa-scale-balanced"></i> Tiết 8: Hội Đồng Đạo Đức AI
+                        </h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-2 text-slate-300">
+                            <p><strong>Lợi ích / Rủi ro:</strong> <span id="sum_t8_br">Chưa nhập</span></p>
+                            <p><strong>Giảm thiểu rủi ro:</strong> <span id="sum_t8_mit">Chưa nhập</span></p>
+                            <p class="col-span-1 md:col-span-2"><strong>Tác động ngành nghề:</strong> <span id="sum_t8_ind" class="text-emerald-300">Chưa nhập</span></p>
+                        </div>
+                    </div>
+
+                    <!-- Summary Tiết 9 -->
+                    <div class="bg-slate-950/60 p-4 rounded-xl border border-slate-800">
+                        <h3 class="font-bold text-purple-400 mb-2 uppercase flex items-center gap-2 text-xs">
+                            <i class="fa-solid fa-heart-pulse"></i> Tiết 9: Nhật Ký Tương Tác & Wellbeing
+                        </h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-2 text-slate-300">
+                            <p><strong>Thói quen cũ:</strong> <span id="sum_t9_old" class="text-rose-300">Chưa nhập</span></p>
+                            <p><strong>Nguyên tắc mới:</strong> <span id="sum_t9_new" class="text-emerald-300">Chưa nhập</span></p>
+                        </div>
+                    </div>
+
+                    <!-- Summary Tiết 10 -->
+                    <div class="bg-slate-950/60 p-4 rounded-xl border border-slate-800">
+                        <h3 class="font-bold text-amber-400 mb-2 uppercase flex items-center gap-2 text-xs">
+                            <i class="fa-solid fa-gavel"></i> Tiết 10: Phán Quyết Quản Trị AI
+                        </h3>
+                        <div class="space-y-1 text-slate-300">
+                            <p><strong>Quyết định triển khai:</strong> <span id="sum_t10_dec" class="font-bold text-amber-300">Chưa chọn</span></p>
+                            <p><strong>Bằng chứng bảo vệ:</strong> <span id="sum_t10_evi">Chưa nhập</span></p>
+                            <p><strong>Nguyên tắc AI cốt lõi:</strong> <span id="sum_t10_rule" class="text-amber-300">Chưa nhập</span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-4 text-center no-print">
+                <button onclick="downloadReportImage()" class="px-6 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs rounded-xl shadow-lg transition-all inline-flex items-center gap-2">
+                    <i class="fa-solid fa-download"></i> TẢI HÌNH BÁO CÁO BÀI LÀM (.PNG)
+                </button>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- CUSTOM POPUP MESSAGE -->
+    <div id="msgModal" class="hidden fixed inset-0 bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4 z-50">
+        <div class="bg-slate-900 border border-slate-700 rounded-2xl p-6 max-w-sm w-full text-center shadow-2xl">
+            <div class="text-3xl mb-2" id="msgIcon">💡</div>
+            <h3 class="text-base font-bold text-white mb-2" id="msgTitle">Thông báo</h3>
+            <p class="text-xs text-slate-300 mb-5" id="msgBody">Nội dung thông báo...</p>
+            <button onclick="closeModal()" class="w-full py-2 bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold rounded-xl transition-all">
+                Đồng Ý
+            </button>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        // State variables
+        let selectedT7Card = "";
+        let selectedT10Decision = "";
+
+        // Switch Lesson Tabs
+        function switchLesson(lessonNum) {
+            for (let l = 7; l <= 10; l++) {
+                const page = document.getElementById(`lesson-${l}`);
+                const btn = document.getElementById(`nav-btn-${l}`);
+                
+                if (l === lessonNum) {
+                    page.classList.remove('hidden');
+                    btn.className = "flex-1 min-w-[140px] py-3 px-4 rounded-xl font-bold text-xs md:text-sm transition-all flex items-center justify-center gap-2 bg-indigo-600 text-white shadow-lg glow-blue";
+                } else {
+                    page.classList.add('hidden');
+                    btn.className = "flex-1 min-w-[140px] py-3 px-4 rounded-xl font-bold text-xs md:text-sm transition-all flex items-center justify-center gap-2 bg-slate-800 text-slate-400 hover:bg-slate-700";
+                }
+            }
+        }
+
+        // Select Card in Lesson 7
+        function selectT7Card(color) {
+            selectedT7Card = color;
+            const greenBtn = document.getElementById('t7-card-green');
+            const yellowBtn = document.getElementById('t7-card-yellow');
+            const redBtn = document.getElementById('t7-card-red');
+
+            greenBtn.classList.remove('ring-2', 'ring-emerald-400', 'bg-emerald-900/60');
+            yellowBtn.classList.remove('ring-2', 'ring-amber-400', 'bg-amber-900/60');
+            redBtn.classList.remove('ring-2', 'ring-rose-400', 'bg-rose-900/60');
+
+            if (color === 'green') {
+                greenBtn.classList.add('ring-2', 'ring-emerald-400', 'bg-emerald-900/60');
+            } else if (color === 'yellow') {
+                yellowBtn.classList.add('ring-2', 'ring-amber-400', 'bg-amber-900/60');
+            } else if (color === 'red') {
+                redBtn.classList.add('ring-2', 'ring-rose-400', 'bg-rose-900/60');
+            }
+        }
+
+        // Select Decision in Lesson 10
+        function selectT10Decision(color) {
+            selectedT10Decision = color;
+            const greenBtn = document.getElementById('t10-dec-green');
+            const yellowBtn = document.getElementById('t10-dec-yellow');
+            const redBtn = document.getElementById('t10-dec-red');
+
+            greenBtn.classList.remove('ring-2', 'ring-emerald-400', 'bg-emerald-900/60');
+            yellowBtn.classList.remove('ring-2', 'ring-amber-400', 'bg-amber-900/60');
+            redBtn.classList.remove('ring-2', 'ring-rose-400', 'bg-rose-900/60');
+
+            if (color === 'green') {
+                greenBtn.classList.add('ring-2', 'ring-emerald-400', 'bg-emerald-900/60');
+            } else if (color === 'yellow') {
+                yellowBtn.classList.add('ring-2', 'ring-amber-400', 'bg-amber-900/60');
+            } else if (color === 'red') {
+                redBtn.classList.add('ring-2', 'ring-rose-400', 'bg-rose-900/60');
+            }
+        }
+
+        // Generate Final Summary Report
+        function generateReport() {
+            const name = document.getElementById('studentName').value.trim();
+            const studentClass = document.getElementById('studentClass').value.trim();
+
+            if (!name || !studentClass) {
+                showModal("⚠️ Cần Điền Thông Tin", "Vui lòng nhập Họ tên và Lớp của em ở thanh trên cùng trước khi tạo báo cáo nhé!");
+                return;
+            }
+
+            // Student Header
+            document.getElementById('reportStudentInfo').innerText = `Học sinh: ${name} | Lớp: ${studentClass}`;
+
+            // T7 Summary
+            let cardText = "Chưa chọn";
+            if (selectedT7Card === 'green') cardText = "🟢 Có thể sử dụng";
+            if (selectedT7Card === 'yellow') cardText = "🟡 Cần kiểm tra";
+            if (selectedT7Card === 'red') cardText = "🔴 Không nên sử dụng (Ảo giác AI)";
+            document.getElementById('sum_t7_card').innerText = cardText;
+            document.getElementById('sum_t7_reason').innerText = document.getElementById('t7-reason-card').value.trim() || "(Chưa nhập)";
+            document.getElementById('sum_t7_imp').innerText = document.getElementById('t7_improvement').value.trim() || "(Chưa nhập)";
+
+            // T8 Summary
+            document.getElementById('sum_t8_br').innerText = document.getElementById('t8_benefit_risk').value.trim() || "(Chưa nhập)";
+            document.getElementById('sum_t8_mit').innerText = document.getElementById('t8_mitigation').value.trim() || "(Chưa nhập)";
+            document.getElementById('sum_t8_ind').innerText = document.getElementById('t8_industry_impact').value.trim() || "(Chưa nhập)";
+
+            // T9 Summary
+            document.getElementById('sum_t9_old').innerText = document.getElementById('t9_old_habit').value.trim() || "(Chưa nhập)";
+            document.getElementById('sum_t9_new').innerText = document.getElementById('t9_new_habit').value.trim() || "(Chưa nhập)";
+
+            // T10 Summary
+            let decText = "Chưa chọn";
+            if (selectedT10Decision === 'green') decText = "🟢 TRIỂN KHAI NGAY";
+            if (selectedT10Decision === 'yellow') decText = "🟡 ĐIỀU CHỈNH RỒI MỚI DÙNG";
+            if (selectedT10Decision === 'red') decText = "🔴 CHƯA TRIỂN KHAI";
+            document.getElementById('sum_t10_dec').innerText = decText;
+            document.getElementById('sum_t10_evi').innerText = document.getElementById('t10_evidences').value.trim() || "(Chưa nhập)";
+            document.getElementById('sum_t10_rule').innerText = document.getElementById('t10_rule').value.trim() || "(Chưa nhập)";
+
+            // Reveal Summary Section
+            const sumSec = document.getElementById('summarySection');
+            sumSec.classList.remove('hidden');
+            sumSec.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Download Report Image via html2canvas
+        function downloadReportImage() {
+            const name = document.getElementById('studentName').value.trim() || "HocSinh";
+            const studentClass = document.getElementById('studentClass').value.trim() || "Lop10";
+            const summaryElement = document.getElementById('summaryCard');
+
+            const cleanName = name.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/\s+/g, "_");
+            const cleanClass = studentClass.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/\s+/g, "_");
+            const fileName = `BaoCao_AI_Governance_${cleanName}_${cleanClass}.png`;
+
+            html2canvas(summaryElement, {
+                scale: 2,
+                backgroundColor: "#0f172a"
+            }).then(canvas => {
+                const link = document.createElement('a');
+                link.download = fileName;
+                link.href = canvas.toDataURL('image/png');
+                link.click();
+                showModal("🎉 Tải Thành Công", `Đã lưu file báo cáo học tập: ${fileName}`);
+            }).catch(err => {
+                console.error(err);
+                showModal("❌ Lỗi Tải File", "Có lỗi xảy ra khi xuất ảnh. Vui lòng thử lại!");
+            });
+        }
+
+        // Custom Modal Alert
+        function showModal(title, body) {
+            document.getElementById('msgTitle').innerText = title;
+            document.getElementById('msgBody').innerText = body;
+            document.getElementById('msgModal').classList.remove('hidden');
+        }
+
+        function closeModal() {
+            document.getElementById('msgModal').classList.add('hidden');
+        }
+    </script>
+</body>
+</html>
